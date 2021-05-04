@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XC59BH0KTK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XC59BH0KTK');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopBots</title>
+    <%- include("./components/header.ejs") %>
+</head>
+<body>
+    <%- include("./components/navbar.ejs", { bot, user }) %>
+        </div>
+        <br>
+    <div class="searchtitle" >
+        <h2 style="text-align: center;" class="searchtitle2" >Поиск</h2>	
+            <% if (search) { %>
+                <p style="text-align: center;font-size: 150%;" >Результаты поиска <strong><%= search %></strong></p>
+            <% } %>
+    </div>
+        <svg style="height: 100%;" class="editorial"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ viewBox="0 24 150 28"
+ preserveAspectRatio="none">
+<defs>
+<path id="gentle-wave"
+d="M-160 44c30 0 
+58-18 88-18s
+58 18 88 18 
+58-18 88-18 
+58 18 88 18
+v44h-352z" />
+</defs>
+<g class="parallax">
+    <use  xlink:href="#gentle-wave" x="75" y="0" class="wave"/>
+    <use xlink:href="#gentle-wave" x="75" y="3" class="wave2"/>
+    <use xlink:href="#gentle-wave" x="75" y="6" class="wave3"/>  
+</g>
+</svg>                  
+<div class="content">
+    <div class="container">
+        <div class="bots-box">
+            <% for(let i = 0; i < bots.length; i++) { %>
+                <div class="row">
+                    <% for(let j = 0; j < bots[i].length; j++) { %>
+                        <div class="col-md-3 mb-3 bot-card-col">
+                            <div class="card">
+                                <% if (bots[i][j].avatar) { %>
+                                    <img class="card-img-top" src="https://cdn.discordapp.com/avatars/<%= bots[i][j].botID %>/<%= bots[i][j].avatar %>.png?size=1280" alt="<%= bots[i][j].tag %>">
+                                <% } else { %>
+                                    <img class="card-img-top" src="https://cdn.discordapp.com/embed/avatars/<%= (bots[i][j].botID % 5) %>.png" alt="<%= bots[i][j].tag %>">
+                                <% } %>
+                                <div class="card-body">
+                                    <h4 class="card-title" style="margin-bottom: 0;"><%= bots[i][j].tag %></h4>
+                                    <center>
+                                        <div class="badges">
+                                            <span class="badge badge-success">Онлайн</span>
+                                            <span class="badge badge-primary">Серверов: <%= bots[i][j].guildsCount %></span>
+                                            <span class="badge badge-danger">Голосов: <%= bots[i][j].upvotes %></span>
+                                        </div>
+                                    </center>
+                                    <p class="card-text"><%= bots[i][j].shortDesc.length > 100 ? bots[i][j].shortDesc.substr(0, 97) + "..." : bots[i][j].shortDesc %></p>
+                                    <div class="btn-group" id="bot-card-bottons" role="group" aria-label="Basic example" style="width: 100%;">
+                                        <style>
+                                            /* Появление границ */
+.viewbutt {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow: hidden;
+}
+.viewbutt:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-color: #2098d1;
+  border-style: solid;
+  border-width: 0;
+  -webkit-transition-property: border-width;
+  transition-property: border-width;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.viewbutt:hover:before, .viewbutt:focus:before, .viewbutt:active:before {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  border-width: 4px;
+}
+                                        </style>
+                                        <a href="/bots/<%= bots[i][j].botID %>" type="button" style="background-color: #0092ac;color: rgb(0, 0, 0);padding-right: 50px;padding-left: 50px;padding-top: 5px;" class="viewbutt">Просмотр</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+    <%- include("./components/footer.ejs") %> 
+</body>
+
+<style>
+.bot-card-avatar {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 757px) {
+    .bot-card-col {
+        margin: 0 30px;
+    }
+}
+</style>
+</html>

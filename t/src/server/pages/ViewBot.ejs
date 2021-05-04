@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XC59BH0KTK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XC59BH0KTK');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="TopBots, Список Дискорд ботов, Лучшие боты, Боты, боты, Discord Bots List, TB, мониторинг ботов Дискорд, discord bot monitoring, боты для дискорда, как добавить бота в дискорд, бот для дискорда музыка">
+    <meta name="description" content="<%= botDB.shortDesc %>">
+    <meta name="yandex-verification" content="860953b3b7436c65" />
+    <title><%= botInfo.username %>  | TopBots</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sanitize-html/1.26.0/sanitize-html.min.js"></script>
+    <script>
+        var lodash = _.noConflict();
+    </script>
+    <%- include("./components/header.ejs") %>
+</head>
+<body style="position: static;">
+    <div class="preloader">
+        <div id="preloader">
+            <div id="loader"></div>
+          </div>
+          <path fill="currentColor"
+            d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z">
+          </path>
+        </svg>
+      </div>
+    
+      <!-- Основной контент страницы -->
+    
+      <script>
+        window.onload = function () {
+          document.body.classList.add('loaded_hiding');
+          window.setTimeout(function () {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+          }, 500);
+        }
+      </script>
+    <%- include("./components/navbar.ejs", { bot, user }) %>
+    <div class="container">
+        <div style="padding-bottom: 10%;" class="info">
+            </div>
+        <div style="border-radius: 30px;" class="jumbotron mt-5">
+            <div class="row" style="width: 100%;">
+                <div class="col-sm-2">
+                    <% if (botInfo.avatar) { %>
+                        <img class="card-img-top" style="border-radius: 20%;" src="https://cdn.discordapp.com/avatars/<%= botInfo.id %>/<%= botInfo.avatar %>.png?size=1280">
+                    <% } else { %>
+                        <img class="card-img-top" style="border-radius: 20%;" src="https://cdn.discordapp.com/embed/avatars/<%= (botInfo.id % 5) %>.png">
+                    <% } %>
+                    <div class="status" style="padding-top: 10%;text-align: center;">
+                        <% if (botMember && botMember.presence && botMember.presence.status === "online") { %>
+                            <span class="badge badge-success" style="font-size: 16px;border-radius: 20px;padding-right: 15px;padding-left: 15px;">Онлайн</span>
+                        <% } else if (botMember && botMember.presence && botInfo.presence.status === "idle") { %>
+                            <span class="badge badge-warning" style="font-size: 16px;border-radius: 20px;padding-right: 15px;padding-left: 15px;">Idle</span>
+                        <% } else if (botMember && botMember.presence && botInfo.presence.status === "dnd") { %>
+                            <span class="badge badge-danger" style="font-size: 16px;border-radius: 20px;padding-right: 15px;padding-left: 15px;">DND</span>
+                        <% } else { %>
+                            <span class="badge badge-secondary" style="font-size: 16px;border-radius: 20px;">Офлайн</span>
+                        <% } %>
+                        </div>
+                </div>
+                <div class="col-sm">
+                    <h3><%= botInfo.username %><small class="text-muted">#<%= botInfo.discriminator %></small></h3>
+                    <span class="badge badge-primary" style="font-size: 16px;border-radius: 0 20px;padding-right: 15px;padding-left: 15px;">Серверов: <%= botDB.guildsCount %></span>
+                    <% if(botInfo.id == '756878980123983995') { %>
+                        <span class="badge badge-danger" style="font-size: 16px;border-radius: 0 20px;padding-right: 15px;padding-left: 15px;">БУСТ</span>
+                    <% } else { %>
+                    <span class="badge badge-danger" style="font-size: 16px;border-radius: 0 20px;padding-right: 15px;padding-left: 15px;">Голосов: <%= dailyUpvotes %></span>
+                    <span class="badge badge-info" style="font-size: 16px;border-radius: 0 20px;padding-right: 15px;padding-left: 15px;">Всего голосов: <%= botDB.totalUpvotes %></span>
+                    <% } %>
+                    <hr class="my-4" style="background-color: #313337">
+                    <div id="bot-description"><%= botDB.longDesc %></div>
+                    <hr style="background-color: #313337;">
+                <div class="info2" style="padding-right: 10%;text-align: left;">
+                    <p style="color: white; mix-blend-mode: difference; font-size: 16px;">Префикс: <code style="padding: 3px 8px; font-weight: bold;"><%= botDB.prefix %></code></p>
+                    <p style="color: white; mix-blend-mode: difference; font-size: 16px;">Владелец: <span class="text-primary"><strong><%= botOwner.username %>#<%= botOwner.discriminator %></strong></span></p>
+                </div>
+                </div>
+                <% if (botDB.botTags.length) { %>
+                <% } %>
+            </div>
+            <p style="color: white; mix-blend-mode: difference; font-size: 15px;text-align: left;">Теги: 
+                <% botDB.botTags.forEach(botTag => { %>
+                    <span class="badge badge-dark" style="background-color:#7289da;"><%= botTag %></span>
+                <% }) %>
+            </p>
+        </div>
+        <hr style="background-color: #313337;">
+             <div class="buttons">
+                <% if (botDB.customInvite) { %>
+                    <a href="<%= botDB.customInvite %>" type="button" target="_blank" class="btn btn-primary pr-3 pl-3 mr-1">Приглашение</a>
+                <% } else { %>
+                    <a href="https://discordapp.com/oauth2/authorize?client_id=<%= botInfo.id %>&scope=bot&permissions=0" target="_blank" type="button" class="btn btn-primary pr-3 pl-3 mr-1">Приглашение</a>
+                <% } %>
+                <a href="/bots/<%= botInfo.id %>/vote" type="button"  class="btn btn-info pr-3 pl-3 mr-1">Проголосовать</a>
+                <% if (botDB.botWebsite) { %>
+                    <a href="<%= botDB.botWebsite %>" type="button" target="_blank" class="btn btn-success pr-3 pl-3 mr-1">Сайт</a>
+                <% } %>
+                <% if (botDB.botServer) { %>
+                    <a href="https://discord.gg/<%= botDB.botServer %>" target="_blank" type="button" class="btn btn-info pr-3 pl-3 mr-1">Сервер Discord</a>
+                <% } %>
+                <% if (user && user.id === botDB.ownerID ||user && user.staff) { %>
+                    <a href="/bots/<%= botInfo.id %>/edit" style="border-radius: 0 20px;" type="button" class="btn btn-warning pr-3 pl-3 mr-1">Редактировать</a>
+                    <a href="/bots/<%= botInfo.id %>/delete" type="button" target="_blank" class="btn btn-danger pr-3 pl-3 mr-1">Удалить</a>
+                <% } %>
+        </div>
+        </div>
+    </div>
+    <hr>
+    <%- include("./components/footer.ejs") %>
+</body>
+
+<script>
+$(document).ready(function () {
+    const descriptionBox = $("#bot-description");
+    const descriptionBoxText = descriptionBox.text() || descriptionBox.val();
+    const markdownRender = marked(descriptionBoxText);
+    const allowedTags = sanitizeHtml.defaults.allowedTags.concat(["img", "center", "style", "iframe"]);
+    const sanitizedRender = sanitizeHtml(markdownRender, { allowedTags });
+    descriptionBox.html(sanitizedRender);
+});
+</script>
+
+</html>

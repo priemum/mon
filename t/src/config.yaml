@@ -1,0 +1,22 @@
+token: "аавпывапывапыапываыпвапываs"
+prefix: "t."
+guilds:
+    main: "761596363795988561"
+    testing: "776944438383214620"
+channels:
+    invite: "https://discord.gg/7FbtuGg"
+    logs: "761597409935228929"
+roles:
+    website: "776981342893375501"
+    tester: "781537343051792405"
+    bots: "761597500771139584"
+    developers: "761597557381529601"
+port: 3080
+color: 0x7289da
+bot:
+    id: "7вапывапывап"
+    secret: "аывпвапыапывапывапывапывапe06"
+    redirect: "https://top-bots.top/auth/callback"
+    scopes:
+        - identify
+        - guilds.join
